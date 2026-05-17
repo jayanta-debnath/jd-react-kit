@@ -24,7 +24,7 @@ type DrawerItems = {
 };
 
 export function Scaffold(params: {
-  appName: string;
+  appname: string;
   title?: string;
   subtitle?: string;
   action?: string;
@@ -54,7 +54,7 @@ export function Scaffold(params: {
 
           <Box sx={{ flexGrow: 1, minWidth: 0, textAlign: "left" }}>
             <Typography variant="h6" noWrap>
-              {params.title ?? params.appName}
+              {params.title ?? params.appname}
             </Typography>
 
             <Typography variant="body2" sx={{ opacity: 0.8 }} noWrap>
@@ -93,10 +93,10 @@ export function Scaffold(params: {
           >
             <Toolbar sx={{ gap: 1.5 }}>
               <Avatar sx={{ width: 32, height: 32, bgcolor: "primary.main" }}>
-                {params.appName.substring(0, 1)}
+                {params.appname.substring(0, 1)}
               </Avatar>
               <Typography variant="h6" noWrap>
-                {params.appName}
+                {params.appname}
               </Typography>
             </Toolbar>
 
