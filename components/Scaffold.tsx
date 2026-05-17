@@ -3,6 +3,7 @@ import {
   Avatar,
   Box,
   Button,
+  ButtonBase,
   Divider,
   Drawer,
   IconButton,
@@ -34,9 +35,13 @@ export function Scaffold(params: {
   body?: ReactNode;
 }) {
   const drawerItems = params.drawerItems ?? [];
-  const hasDrawerItems = drawerItems.length > 0;
   const [mobileOpen, setMobileOpen] = useState(false);
   const navigate = useNavigate();
+
+  const handleHomeClick = () => {
+    setMobileOpen(false);
+    navigate("/");
+  };
 
   const handleDrawerItemClick = (item: DrawerItems) => {
     setMobileOpen(false);
@@ -48,7 +53,16 @@ export function Scaffold(params: {
 
   const drawerContent = (
     <Box sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
-      <Toolbar sx={{ gap: 1.5 }}>
+      <Toolbar
+        component={ButtonBase}
+        onClick={handleHomeClick}
+        sx={{
+          gap: 1.5,
+          width: "100%",
+          justifyContent: "flex-start",
+          color: "inherit",
+        }}
+      >
         <Avatar sx={{ width: 32, height: 32, bgcolor: "primary.main" }}>
           {params.appname.substring(0, 1)}
         </Avatar>
@@ -83,17 +97,15 @@ export function Scaffold(params: {
         }}
       >
         <Toolbar>
-          {hasDrawerItems && (
-            <IconButton
-              color="inherit"
-              edge="start"
-              aria-label="open navigation"
-              onClick={() => setMobileOpen(true)}
-              sx={{ mr: 2, display: { md: "none" } }}
-            >
-              <MenuIcon />
-            </IconButton>
-          )}
+          <IconButton
+            color="inherit"
+            edge="start"
+            aria-label="open navigation"
+            onClick={() => setMobileOpen(true)}
+            sx={{ mr: 2, display: { md: "none" } }}
+          >
+            <MenuIcon />
+          </IconButton>
 
           <Box sx={{ flexGrow: 1, minWidth: 0, textAlign: "left" }}>
             <Typography variant="h6" noWrap>
@@ -117,39 +129,37 @@ export function Scaffold(params: {
         </Toolbar>
       </AppBar>
 
-      {hasDrawerItems && (
-        <Box component="nav" sx={{ width: { md: drawerWidth }, flexShrink: 0 }}>
-          <Drawer
-            variant="temporary"
-            open={mobileOpen}
-            onClose={() => setMobileOpen(false)}
-            ModalProps={{ keepMounted: true }}
-            sx={{
-              display: { xs: "block", md: "none" },
-              "& .MuiDrawer-paper": {
-                width: drawerWidth,
-                boxSizing: "border-box",
-              },
-            }}
-          >
-            {drawerContent}
-          </Drawer>
+      <Box component="nav" sx={{ width: { md: drawerWidth }, flexShrink: 0 }}>
+        <Drawer
+          variant="temporary"
+          open={mobileOpen}
+          onClose={() => setMobileOpen(false)}
+          ModalProps={{ keepMounted: true }}
+          sx={{
+            display: { xs: "block", md: "none" },
+            "& .MuiDrawer-paper": {
+              width: drawerWidth,
+              boxSizing: "border-box",
+            },
+          }}
+        >
+          {drawerContent}
+        </Drawer>
 
-          <Drawer
-            variant="permanent"
-            sx={{
-              display: { xs: "none", md: "block" },
-              "& .MuiDrawer-paper": {
-                width: drawerWidth,
-                boxSizing: "border-box",
-              },
-            }}
-            open
-          >
-            {drawerContent}
-          </Drawer>
-        </Box>
-      )}
+        <Drawer
+          variant="permanent"
+          sx={{
+            display: { xs: "none", md: "block" },
+            "& .MuiDrawer-paper": {
+              width: drawerWidth,
+              boxSizing: "border-box",
+            },
+          }}
+          open
+        >
+          {drawerContent}
+        </Drawer>
+      </Box>
 
       <Box component="main" sx={{ flexGrow: 1, minWidth: 0 }}>
         <Toolbar />
