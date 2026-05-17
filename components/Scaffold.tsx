@@ -161,7 +161,7 @@ export function Scaffold(params: {
         </Drawer>
       </Box>
 
-      <Box component="main" sx={{ flexGrow: 1, minWidth: 0 }}>
+      <Box component="main" sx={{ flexGrow: 1, minWidth: 0, pt: 2 }}>
         <Toolbar />
         {params.body}
       </Box>

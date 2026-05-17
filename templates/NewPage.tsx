@@ -3,7 +3,7 @@ import { Scaffold } from "../components/Scaffold";
 import { Box } from "@mui/material";
 
 import yaml from "js-yaml";
-import PageYaml from "../contents/Page.yaml?raw";
+import NewPageYaml from "../contents/NewPage.yaml?raw";
 
 type PageContent = {
   title: string;
@@ -11,8 +11,10 @@ type PageContent = {
   phone: string;
   email: string;
 };
-const pageContent = yaml.load(PageYaml) as PageContent;
+const pageContent = yaml.load(NewPageYaml) as PageContent;
 
 export default function NewPage() {
-  return <Scaffold appname="YETGER" title="Contact Us" body=<Box></Box> />;
+  return (
+    <Scaffold appname="YETGER" title={pageContent.title} body=<Box></Box> />
+  );
 }
