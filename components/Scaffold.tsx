@@ -15,12 +15,14 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState, type ReactNode } from "react";
+import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
 type DrawerItems = {
   icon: ReactNode;
   text: string;
+  page?: string;
 };
 
 export function Scaffold(params: {
@@ -32,7 +34,17 @@ export function Scaffold(params: {
   body?: ReactNode;
 }) {
   const drawerItems = params.drawerItems ?? [];
+  const hasDrawerItems = drawerItems.length > 0;
   const [mobileOpen, setMobileOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleDrawerItemClick = (item: DrawerItems) => {
+    setMobileOpen(false);
+
+    if (item.page) {
+      navigate(item.page);
+    }
+  };
 
   const drawerContent = (
     <Box sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
@@ -49,7 +61,10 @@ export function Scaffold(params: {
 
       <List sx={{ px: 1, py: 2 }}>
         {drawerItems.map((item) => (
-          <ListItemButton key={item.text} onClick={() => setMobileOpen(false)}>
+          <ListItemButton
+            key={item.text}
+            onClick={() => handleDrawerItemClick(item)}
+          >
             <ListItemIcon>{item.icon}</ListItemIcon>
             <ListItemText primary={item.text} />
           </ListItemButton>
@@ -68,15 +83,17 @@ export function Scaffold(params: {
         }}
       >
         <Toolbar>
-          <IconButton
-            color="inherit"
-            edge="start"
-            aria-label="open navigation"
-            onClick={() => setMobileOpen(true)}
-            sx={{ mr: 2, display: { md: "none" } }}
-          >
-            <MenuIcon />
-          </IconButton>
+          {hasDrawerItems && (
+            <IconButton
+              color="inherit"
+              edge="start"
+              aria-label="open navigation"
+              onClick={() => setMobileOpen(true)}
+              sx={{ mr: 2, display: { md: "none" } }}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
 
           <Box sx={{ flexGrow: 1, minWidth: 0, textAlign: "left" }}>
             <Typography variant="h6" noWrap>
@@ -100,7 +117,7 @@ export function Scaffold(params: {
         </Toolbar>
       </AppBar>
 
-      {drawerItems.length > 0 && (
+      {hasDrawerItems && (
         <Box component="nav" sx={{ width: { md: drawerWidth }, flexShrink: 0 }}>
           <Drawer
             variant="temporary"
