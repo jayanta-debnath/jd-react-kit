@@ -28,6 +28,7 @@ type DrawerItems = {
 
 export function Scaffold(params: {
   appname: string;
+  logo?: string;
   title?: string;
   subtitle?: string;
   action?: string;
@@ -63,7 +64,11 @@ export function Scaffold(params: {
           color: "inherit",
         }}
       >
-        <Avatar sx={{ width: 32, height: 32, bgcolor: "primary.main" }}>
+        <Avatar
+          src={params.logo}
+          alt={params.logo ? `${params.appname} logo` : undefined}
+          sx={{ width: 32, height: 32 }}
+        >
           {params.appname.substring(0, 1)}
         </Avatar>
         <Typography variant="h6" noWrap>

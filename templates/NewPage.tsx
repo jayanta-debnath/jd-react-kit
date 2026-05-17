@@ -15,6 +15,11 @@ const pageContent = yaml.load(NewPageYaml) as PageContent;
 
 export default function NewPage() {
   return (
-    <Scaffold appname="YETGER" title={pageContent.title} body=<Box></Box> />
+    <Scaffold
+      appname="YETGER"
+      logo="/assets/images/logo.png"
+      title={pageContent.title}
+      body=<Box></Box>
+    />
   );
 }
