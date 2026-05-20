@@ -18,6 +18,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import packageJson from "../../../package.json";
 
 export type ToolbarAction = {
   label: string;
@@ -53,6 +54,7 @@ export default function MainLayout({
   );
   const primaryToolbarAction = toolbarActions[0];
   const overflowToolbarActions = toolbarActions.slice(1);
+  const appVersion = packageJson.version;
 
   const handleDrawerToggle = () => {
     setMobileOpen((open) => !open);
@@ -77,9 +79,9 @@ export default function MainLayout({
   };
 
   const drawerContent = (
-    <>
+    <Box sx={{ display: "flex", minHeight: "100%", flexDirection: "column" }}>
       <Toolbar />
-      <Box sx={{ overflow: "auto" }}>
+      <Box sx={{ flexGrow: 1, overflow: "auto" }}>
         <List>
           {sidebarItems.map((item, index) => (
             <Fragment key={`${item.label}-${index}`}>
@@ -95,7 +97,21 @@ export default function MainLayout({
           ))}
         </List>
       </Box>
-    </>
+      <Box
+        sx={{
+          m: 2,
+          borderRadius: 1,
+          bgcolor: "grey.100",
+          color: "text.secondary",
+          px: 1.5,
+          py: 1,
+        }}
+      >
+        <Typography variant="caption" component="p">
+          Version {appVersion}
+        </Typography>
+      </Box>
+    </Box>
   );
 
   return (
