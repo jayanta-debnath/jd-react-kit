@@ -115,7 +115,7 @@ export default function MainLayout({
   );
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", width: "100%", minWidth: 0 }}>
       <AppBar
         position="fixed"
         sx={{
@@ -249,8 +249,9 @@ export default function MainLayout({
         component="main"
         sx={{
           flexGrow: 1,
+          minWidth: 0,
           p: 2,
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
+          width: { xs: "100%", sm: `calc(100% - ${drawerWidth}px)` },
         }}
       >
         <Toolbar />
