@@ -34,19 +34,23 @@ export type SidebarItem = {
 };
 
 export type MainLayoutProps = {
-  title: string;
+  title?: string;
+  logo?: string; // path to logo image
   subtitle?: string;
   toolbarActions: ToolbarAction[];
   sidebarItems: SidebarItem[];
   drawerWidth?: number;
+  transparency?: boolean;
 };
 
 export default function MainLayout({
   title,
+  logo,
   subtitle,
   toolbarActions,
   sidebarItems,
   drawerWidth = 240,
+  transparency = false,
 }: MainLayoutProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [actionsAnchorEl, setActionsAnchorEl] = useState<null | HTMLElement>(
@@ -82,6 +86,7 @@ export default function MainLayout({
     <Box sx={{ display: "flex", minHeight: "100%", flexDirection: "column" }}>
       <Toolbar />
       <Box sx={{ flexGrow: 1, overflow: "auto" }}>
+        <List />
         <List>
           {sidebarItems.map((item, index) => (
             <Fragment key={`${item.label}-${index}`}>
@@ -120,6 +125,14 @@ export default function MainLayout({
         position="fixed"
         sx={{
           zIndex: (theme) => theme.zIndex.drawer + 1,
+          ...(transparency
+            ? {
+              backgroundColor: "transparent",
+              boxShadow: "none",
+              backdropFilter: "blur(12px)",
+              WebkitBackdropFilter: "blur(12px)",
+            }
+            : {}),
         }}
       >
         <Toolbar sx={{ gap: 1 }}>
@@ -134,9 +147,22 @@ export default function MainLayout({
           </IconButton>
 
           <Box sx={{ minWidth: 0, textAlign: "left" }}>
-            <Typography variant="h6" noWrap>
-              {title}
-            </Typography>
+
+            {/* logo */}
+            {logo ? (
+              <Box
+                component="img"
+                src={logo}
+                sx={{
+                  width: 50,
+                  height: 50,
+                  display: "block",
+                  mx: "auto",
+                }}
+              />) : null}
+
+
+            {/* subtitle */}
             {subtitle ? (
               <Typography
                 variant="caption"
@@ -145,12 +171,21 @@ export default function MainLayout({
                   display: { xs: "none", sm: "block" },
                   lineHeight: 1,
                   opacity: 0.8,
+                  color: "primary.main"
                 }}
               >
                 {subtitle}
               </Typography>
             ) : null}
+
+            {/* title */}
+            <Typography variant="h6" noWrap sx={{ color: "primary.main" }}>
+              {title}
+            </Typography>
+
           </Box>
+
+
 
           <Box sx={{ flexGrow: 1 }} />
 
@@ -224,6 +259,14 @@ export default function MainLayout({
             "& .MuiDrawer-paper": {
               width: drawerWidth,
               boxSizing: "border-box",
+
+              ...(transparency
+                ? {
+                  backgroundColor: "transparent",
+                  boxShadow: "none",
+                  backdropFilter: "blur(14px)",
+                  WebkitBackdropFilter: "blur(14px)",
+                } : {})
             },
           }}
         >
@@ -238,6 +281,14 @@ export default function MainLayout({
             "& .MuiDrawer-paper": {
               width: drawerWidth,
               boxSizing: "border-box",
+
+              ...(transparency
+                ? {
+                  backgroundColor: "transparent",
+                  boxShadow: "none",
+                  backdropFilter: "blur(14px)",
+                  WebkitBackdropFilter: "blur(14px)",
+                } : {})
             },
           }}
         >
