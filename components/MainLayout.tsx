@@ -86,7 +86,7 @@ export default function MainLayout({
     <Box sx={{ display: "flex", minHeight: "100%", flexDirection: "column" }}>
       <Toolbar />
       <Box sx={{ flexGrow: 1, overflow: "auto" }}>
-        <List />
+
         <List>
           {sidebarItems.map((item, index) => (
             <Fragment key={`${item.label}-${index}`}>
