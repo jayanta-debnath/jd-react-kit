@@ -129,8 +129,6 @@ export default function MainLayout({
             ? {
               backgroundColor: "transparent",
               boxShadow: "none",
-              backdropFilter: "blur(12px)",
-              WebkitBackdropFilter: "blur(12px)",
             }
             : {}),
         }}
@@ -138,7 +136,6 @@ export default function MainLayout({
         <Toolbar sx={{ gap: 1 }}>
           <IconButton
             aria-label="open navigation"
-            color="inherit"
             edge="start"
             onClick={handleDrawerToggle}
             sx={{ display: { sm: "none" } }}
