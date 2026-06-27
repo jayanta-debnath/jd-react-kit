@@ -179,7 +179,7 @@ export default function MainLayout({
             ) : null}
 
             {/* title */}
-            <Typography variant="h6" noWrap sx={{ color: "primary.main" }}>
+            <Typography variant="h6" noWrap sx={{ color: 'var(--accent)', fontFamily: '"Playfair Display", Georgia, serif' }}>
               {title}
             </Typography>
 
