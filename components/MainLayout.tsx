@@ -143,22 +143,21 @@ export default function MainLayout({
             <MenuIcon />
           </IconButton>
 
+          {/* logo and title in AppBar */}
+          {logo ? (
+            <Box
+              component="img"
+              src={logo}
+              sx={{
+                width: 50,
+                height: 50,
+                display: "block",
+                mr: 2,
+              }}
+            />
+          ) : null}
+
           <Box sx={{ minWidth: 0, textAlign: "left" }}>
-
-            {/* logo */}
-            {logo ? (
-              <Box
-                component="img"
-                src={logo}
-                sx={{
-                  width: 50,
-                  height: 50,
-                  display: "block",
-                  mx: "auto",
-                }}
-              />) : null}
-
-
             {/* subtitle */}
             {subtitle ? (
               <Typography
@@ -179,10 +178,7 @@ export default function MainLayout({
             <Typography variant="h6" noWrap sx={{ color: 'var(--accent)', fontFamily: '"Playfair Display", Georgia, serif' }}>
               {title}
             </Typography>
-
           </Box>
-
-
 
           <Box sx={{ flexGrow: 1 }} />
 
@@ -242,6 +238,8 @@ export default function MainLayout({
         sx={{
           width: { sm: drawerWidth },
           flexShrink: { sm: 0 },
+          // Ensure sidebar starts below AppBar
+          mt: { xs: 0, sm: 0 }, // This ensures proper positioning
         }}
       >
         <Drawer
@@ -256,6 +254,8 @@ export default function MainLayout({
             "& .MuiDrawer-paper": {
               width: drawerWidth,
               boxSizing: "border-box",
+              top: { xs: '64px', sm: '0px' }, // Position drawer below AppBar
+              height: { xs: 'calc(100% - 64px)', sm: '100%' },
 
               ...(transparency
                 ? {
@@ -278,6 +278,8 @@ export default function MainLayout({
             "& .MuiDrawer-paper": {
               width: drawerWidth,
               boxSizing: "border-box",
+              top: '64px', // Position drawer below AppBar on desktop
+              height: 'calc(100% - 64px)',
 
               ...(transparency
                 ? {
@@ -300,6 +302,7 @@ export default function MainLayout({
           minWidth: 0,
           p: 2,
           width: { xs: "100%", sm: `calc(100% - ${drawerWidth}px)` },
+          mt: { xs: '64px', sm: '0px' }, // Push main content below AppBar
         }}
       >
         <Toolbar />
