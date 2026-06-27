@@ -259,7 +259,7 @@ export default function MainLayout({
 
               ...(transparency
                 ? {
-                  backgroundColor: "transparent",
+                  backgroundColor: 'var(--bg)',
                   boxShadow: "none",
                   backdropFilter: "blur(14px)",
                   WebkitBackdropFilter: "blur(14px)",
