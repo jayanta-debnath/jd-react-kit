@@ -18,7 +18,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import packageJson from "../../../package.json";
+import packageJson from "../package.json";
 
 export type ToolbarAction = {
   label: string;
