@@ -1,5 +1,6 @@
-import { AppShell, Burger, Group } from '@mantine/core'; // 1. Import Group
+import { AppShell, Burger, Group } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import { ThemeToggle } from './ThemeToggle';
 
 export function MainLayout(params: { title: string; body: string }) {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
@@ -15,9 +16,12 @@ export function MainLayout(params: { title: string; body: string }) {
       padding="md"
     >
       <AppShell.Header>
-        <Group h="100%" px="md">
-          <Burger opened={mobileOpened} onClick={toggleMobile} hiddenFrom="sm" size="sm" />
-          <div>{params.title}</div>
+        <Group h="100%" px="md" justify="space-between">
+          <Group>
+            <Burger opened={mobileOpened} onClick={toggleMobile} hiddenFrom="sm" size="sm" />
+            <div>{params.title}</div>
+          </Group>
+          <ThemeToggle />
         </Group>
       </AppShell.Header>
 
