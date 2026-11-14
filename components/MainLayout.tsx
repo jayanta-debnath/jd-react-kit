@@ -1,13 +1,14 @@
-import { AppShell, Burger, Group } from '@mantine/core';
+import { AppShell, Box, Burger, Group } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { ThemeToggle } from './ThemeToggle';
 
-export function MainLayout(params: { title: string; body: string }) {
+export function MainLayout(params: { title: string; body: React.ReactNode; footer?: React.ReactNode }) {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
 
   return (
     <AppShell
       header={{ height: 60 }}
+      footer={{ height: params.footer == null ? 0 : 60 }}
       navbar={{
         width: 300,
         breakpoint: 'sm',
@@ -27,7 +28,16 @@ export function MainLayout(params: { title: string; body: string }) {
 
       <AppShell.Navbar p="md">Navigation Links</AppShell.Navbar>
 
-      <AppShell.Main>{params.body}</AppShell.Main>
+      <AppShell.Main>
+        {params.body}
+      </AppShell.Main>
+
+      {params.footer && (
+        <AppShell.Footer p="sm">
+          {params.footer}
+        </AppShell.Footer>
+      )}
     </AppShell>
   );
 }
+
